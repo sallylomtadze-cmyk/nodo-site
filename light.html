@@ -110,12 +110,54 @@
   footer { background:var(--ink); color:#b9bbc8; font-size:14px; padding:40px 6vw 48px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px 30px; border-top:1px solid #ffffff1f; }
   footer .brand { color:#fff; }
 
-  @media (max-width:1000px) { .goods, .how ol, .proof { grid-template-columns:1fr 1fr; } .proof div:nth-child(2) { border-right:0; } .proof div:nth-child(3) { padding-left:0; } }
-  @media (max-width:800px) {
+  /* tablet */
+  @media (max-width:1000px) {
+    .goods { grid-template-columns:repeat(3,1fr); }
+    .how ol, .proof { grid-template-columns:1fr 1fr; }
+    .proof div:nth-child(2) { border-right:0; } .proof div:nth-child(3) { padding-left:0; }
+    .proof div:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+  }
+  @media (max-width:900px) {
     nav a:not(.logo):not(.phone) { display:none; }
-    .hero .in { grid-template-columns:1fr; padding-top:16vh; }
-    .split, .track, .apply { grid-template-columns:1fr; }
-    .quote .row { grid-template-columns:1fr; }
+    nav .phone { background:#ffffff22; padding:9px 14px; border-radius:6px; backdrop-filter:blur(6px); }
+    section { padding:64px 6vw; }
+    /* hero: photo with the headline, the rate card pulls up over its bottom edge */
+    .hero { display:block; min-height:0; background:var(--paper); padding-bottom:48px; }
+    .hero img, .hero::before { bottom:auto; height:86vh; height:86svh; }
+    .hero .in { display:block; padding:0; }
+    .hero .in > div { min-height:86vh; min-height:86svh; display:grid; align-content:end; padding:0 6vw 96px; }
+    .hero p { margin-top:16px; font-size:18px; }
+    .quote { margin:-56px 6vw 0; box-shadow:0 20px 50px -20px #12142066; }
+    .split, .track { grid-template-columns:1fr; gap:28px; }
+    .mapcard { min-height:300px; }
+    .scene.narrow { aspect-ratio:730/430; }
+    .scene.narrow text { font-size:22px; }
+  }
+  /* phone */
+  @media (max-width:640px) {
+    body { font-size:16px; }
+    h1 { font-size:clamp(52px,16vw,72px); }
+    h2 { font-size:clamp(36px,11vw,48px); }
+    .quote { padding:22px; gap:12px; }
+    .quote .row, .apply { grid-template-columns:1fr; }
+    .quote h3 { font-size:20px; }
+    .proof div { padding:22px 0; }
+    .proof div + div { padding-left:18px; } .proof div { padding-right:18px; }
+    .proof b { font-size:34px; }
+    .proof span { font-size:14px; }
+    .goods { grid-template-columns:1fr 1fr; gap:18px 14px; margin-top:28px; }
+    .goods b { font-size:15px; margin-top:8px; }
+    .trailers { margin-top:28px; }
+    .how ol { grid-template-columns:1fr; gap:0; margin-top:28px; }
+    .how li { display:grid; grid-template-columns:44px 1fr; column-gap:14px; padding:18px 0; font-size:18px; }
+    .how li::before { grid-row:span 2; font-size:36px; margin:2px 0 0; }
+    .how li small { font-size:15px; }
+    .facts, .perks { font-size:17px; }
+    .panel { padding:22px; gap:18px; }
+    .mini b { font-size:26px; }
+    .apply { padding:22px; gap:14px; }
+    .apply .btn, .btn { width:100%; text-align:center; }
+    footer { padding:32px 6vw 40px; flex-direction:column; gap:10px; }
   }
   @media (prefers-reduced-motion:reduce) { .pulse { animation:none; } }
   .sceneband { background:var(--paper); overflow:hidden; }
@@ -318,6 +360,10 @@
   <span><a href="tel:+15550102040">(555) 010-2040</a> &nbsp; <a href="mailto:dispatch@nodo.example">dispatch@nodo.example</a></span>
 </footer>
 <script>
+  // phones: crop the scene to the pickup-to-delivery stretch so trucks and labels stay readable
+  const scene = document.querySelector('.scene'), narrow = matchMedia('(max-width:900px)');
+  const fit = () => { scene.setAttribute('viewBox', narrow.matches ? '490 50 730 430' : '0 0 1200 520'); scene.classList.toggle('narrow', narrow.matches); };
+  narrow.onchange = fit; fit();
   // ponytail: no backend yet, wire both forms to email/TMS when ready
   for (const [f, msg] of [['quoteForm','quoteSent'],['applyForm','sent']])
     document.getElementById(f).onsubmit = e => { e.preventDefault(); e.target.reset(); document.getElementById(msg).hidden = false; };
