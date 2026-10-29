@@ -123,15 +123,16 @@
     section { padding:64px 6vw; }
     /* hero: photo with the headline, the rate card pulls up over its bottom edge */
     .hero { display:block; min-height:0; background:var(--paper); padding-bottom:48px; }
-    .hero img, .hero::before { bottom:auto; height:86vh; height:86svh; }
+    .hero img, .hero::before { bottom:auto; height:78vh; height:78svh; }
     .hero .in { display:block; padding:0; }
-    .hero .in > div { min-height:86vh; min-height:86svh; display:grid; align-content:end; padding:0 6vw 96px; }
+    .hero .in > div { min-height:78vh; min-height:78svh; display:grid; align-content:end; padding:0 6vw 96px; }
     .hero p { margin-top:16px; font-size:18px; }
     .quote { margin:-56px 6vw 0; box-shadow:0 20px 50px -20px #12142066; }
     .split, .track { grid-template-columns:1fr; gap:28px; }
     .mapcard { min-height:300px; }
     .scene.narrow { aspect-ratio:730/430; }
     .scene.narrow text { font-size:22px; }
+    .scene.narrow [filter] { filter:none; } /* ponytail: iOS re-rasterises every filter each frame, flat shapes on phones */
   }
   /* phone */
   @media (max-width:640px) {
@@ -139,7 +140,8 @@
     h1 { font-size:clamp(52px,16vw,72px); }
     h2 { font-size:clamp(36px,11vw,48px); }
     .quote { padding:22px; gap:12px; }
-    .quote .row, .apply { grid-template-columns:1fr; }
+    .apply { grid-template-columns:1fr; }
+    .quote .row { gap:10px; }
     .quote h3 { font-size:20px; }
     .proof div { padding:22px 0; }
     .proof div + div { padding-left:18px; } .proof div { padding-right:18px; }
@@ -247,7 +249,7 @@
     <text x="1100" y="371">DELIVERY</text>
   </g>
   <!-- moving trucks -->
-  <g filter="url(#sh)">
+  <g class="fleet" filter="url(#sh)">
     <use href="#truck"><animateMotion dur="11s" repeatCount="indefinite" rotate="auto"><mpath href="#road"/></animateMotion></use>
     <use href="#truck"><animateMotion dur="11s" begin="-5.5s" repeatCount="indefinite" rotate="auto"><mpath href="#road"/></animateMotion></use>
   </g>
@@ -257,9 +259,9 @@
 
 <div class="wrap">
   <div class="proof">
-    <div><b>120</b><span>company trucks, no brokers</span></div>
-    <div><b>98.7%</b><span>on-time delivery, last 12 months</span></div>
-    <div><b>48</b><span>states, plus Canada and Mexico lanes</span></div>
+    <div><b>120</b><span>company trucks</span></div>
+    <div><b>98.7%</b><span>on-time delivery</span></div>
+    <div><b>48</b><span>states plus Canada and Mexico</span></div>
     <div><b>2009</b><span>on the road since</span></div>
   </div>
 </div>
