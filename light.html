@@ -13,6 +13,10 @@
   html { scroll-behavior:smooth; }
   body { background:var(--white); color:var(--ink); font-family:Archivo,sans-serif; font-size:17px; line-height:1.5; }
   img { display:block; max-width:100%; }
+  html, body { overflow-x:clip; }
+  input, select, button { min-width:0; max-width:100%; }
+  label { min-width:0; }
+  input[type=date] { display:block; min-height:46px; text-align:left; }
   a { color:inherit; text-decoration:none; }
   :focus-visible { outline:3px solid var(--violet); outline-offset:3px; }
   .brand, .logo { font-family:Unbounded,sans-serif; font-weight:900; letter-spacing:-.5px; }
@@ -44,7 +48,7 @@
   .quote h3 { font-size:22px; font-weight:600; }
   .quote .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .quote label { display:grid; gap:5px; font-size:13px; font-weight:600; color:var(--grey); }
-  .quote input, .quote select { font:inherit; font-size:16px; color:var(--ink); padding:11px 12px; border:1px solid var(--line); border-radius:6px; background:#fafaf8; }
+  .quote input, .quote select { width:100%; font:inherit; font-size:16px; color:var(--ink); padding:11px 12px; border:1px solid var(--line); border-radius:6px; background:#fafaf8; }
   .quote input:focus, .quote select:focus { outline:2px solid var(--violet); outline-offset:-1px; }
   .quote .btn { width:100%; margin-top:4px; }
   .quote small { color:var(--grey); font-size:13px; }
@@ -102,7 +106,7 @@
   .need { color:#b9bbc8; }
   .apply { display:grid; grid-template-columns:1fr 1fr; gap:16px; background:#fff; color:var(--ink); border-radius:10px; padding:28px; }
   .apply label { display:grid; gap:6px; font-size:14px; font-weight:600; }
-  .apply input, .apply select { font:inherit; font-weight:400; color:var(--ink); padding:12px 14px; border:1px solid var(--line); border-radius:6px; background:#fafaf8; }
+  .apply input, .apply select { width:100%; font:inherit; font-weight:400; color:var(--ink); padding:12px 14px; border:1px solid var(--line); border-radius:6px; background:#fafaf8; }
   .apply input:focus, .apply select:focus { outline:2px solid var(--violet); outline-offset:-1px; }
   .apply .btn { grid-column:1/-1; justify-self:start; }
   .apply .sent { grid-column:1/-1; color:var(--violet); font-weight:600; }
@@ -158,7 +162,7 @@
     .panel { padding:22px; gap:18px; }
     .mini b { font-size:26px; }
     .apply { padding:22px; gap:14px; }
-    .apply .btn, .btn { width:100%; text-align:center; }
+    .apply .btn, .btn { width:100%; text-align:center; padding:13px 20px; font-size:15px; }
     footer { padding:32px 6vw 40px; flex-direction:column; gap:10px; }
   }
   @media (prefers-reduced-motion:reduce) { .pulse { animation:none; } }
@@ -192,7 +196,7 @@
       </div>
       <div class="row">
         <label>Trailer<select name="trailer"><option>Dry van</option><option>Reefer</option><option>Flatbed</option><option>Power only</option></select></label>
-        <label>Ship date<input name="date" type="date" required></label>
+        <label>Ship date<input name="date" type="date" required style="-webkit-appearance:none;appearance:none"></label>
       </div>
       <label>Work email<input name="email" type="email" required autocomplete="email"></label>
       <button class="btn" type="submit">Send request</button>
