@@ -126,11 +126,11 @@
     nav .phone { background:#ffffff22; padding:9px 14px; border-radius:6px; backdrop-filter:blur(6px); }
     section { padding:64px 6vw; }
     /* hero: photo with the headline, the rate card pulls up over its bottom edge */
-    .hero { display:block; min-height:0; background:var(--paper); padding-bottom:48px; }
-    .hero img, .hero::before { bottom:auto; height:78vh; height:78svh; }
+    .hero { display:block; min-height:0; background:var(--paper); padding-bottom:32px; }
+    .hero img, .hero::before { bottom:auto; height:62vh; height:62svh; }
     .hero .in { display:block; padding:0; }
-    .hero .in > div { min-height:78vh; min-height:78svh; display:grid; align-content:end; padding:0 6vw 96px; }
-    .hero p { margin-top:16px; font-size:18px; }
+    .hero .in > div { min-height:62vh; min-height:62svh; display:grid; align-content:end; padding:0 6vw 72px; }
+    .hero p { margin-top:12px; font-size:17px; max-width:30ch; }
     .quote { margin:-56px 6vw 0; box-shadow:0 20px 50px -20px #12142066; }
     .split, .track { grid-template-columns:1fr; gap:28px; }
     .mapcard { min-height:300px; }
@@ -143,7 +143,10 @@
     body { font-size:16px; }
     h1 { font-size:clamp(52px,16vw,72px); }
     h2 { font-size:clamp(36px,11vw,48px); }
-    .quote { padding:22px; gap:12px; }
+    .quote { padding:20px; gap:10px; }
+    .quote small:last-child { display:none; }
+    .quote label { gap:4px; }
+    .quote input, .quote select { padding:10px 12px; }
     .apply { grid-template-columns:1fr; }
     .quote .row { gap:10px; }
     .quote h3 { font-size:20px; }
