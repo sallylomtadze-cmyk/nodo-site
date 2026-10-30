@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HaulStar Freight</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0b1428; --bg2:#14223f; --ink:#e9eef8; --muted:#9fb0cc; --accent:#7fd6e6; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:radial-gradient(ellipse at 50% 110%, #1d3462 0%, var(--bg) 60%) fixed; color:var(--ink); font-family:Montserrat,sans-serif; overflow-x:hidden; }
+  body::before { /* stars */
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:.6;
+    background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 55% 15%,#fff,transparent),radial-gradient(1px 1px at 75% 45%,#fff,transparent),
+      radial-gradient(1px 1px at 90% 80%,#fff,transparent),radial-gradient(1px 1px at 45% 40%,#fff,transparent);
+    background-size:400px 400px;
+  }
+  a { color:inherit; text-decoration:none; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:22px 6vw; border-bottom:1px solid #ffffff22; position:relative; z-index:2; }
+  .logo { font-weight:700; letter-spacing:.5px; } .logo span { color:var(--accent); }
+  nav ul { display:flex; gap:34px; list-style:none; padding:0; font-size:13px; font-weight:600; align-items:center; }
+  nav ul a.active { box-shadow:0 18px 0 -16px var(--accent); }
+  .pill { display:inline-block; background:#eef6ff; color:#0b1428; border-radius:999px; padding:10px 26px; font-size:12px; font-weight:700; letter-spacing:1px; box-shadow:0 0 30px #7fd6e666; transition:transform .2s; border:0; cursor:pointer; font-family:inherit; }
+  .pill:hover { transform:translateY(-2px); }
+  nav .pill { padding:7px 20px; }
+
+  /* hero carousel */
+  .hero { position:relative; min-height:calc(100vh - 70px); text-align:center; padding:9vh 6vw 0; overflow:hidden; }
+  .kicker { letter-spacing:5px; font-weight:700; font-size:15px; }
+  h1 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(64px,12vw,150px); line-height:1; margin:10px 0 18px; }
+  .bar { width:70px; height:3px; background:var(--accent); margin:0 auto 22px; }
+  .hero p { max-width:520px; margin:0 auto 34px; font-size:13px; line-height:1.7; color:var(--muted); }
+  .fade { transition:opacity .4s, transform .4s; } .fade.out { opacity:0; transform:translateY(12px); }
+  .side { position:absolute; top:52%; display:flex; align-items:center; gap:22px; background:none; border:0; color:var(--ink); cursor:pointer; font:500 15px 'Cormorant Garamond',serif; letter-spacing:3px; text-transform:uppercase; }
+  .side svg { width:120px; opacity:.85; }
+  .side.prev { left:-10px; } .side.next { right:-10px; flex-direction:row-reverse; }
+  .side.next svg { transform:scaleX(-1); }
+  .stage { position:relative; height:300px; margin-top:40px; }
+  .road { position:absolute; left:50%; bottom:-260px; width:1100px; height:420px; transform:translateX(-50%); border-radius:50%;
+    background:radial-gradient(ellipse at 50% 30%, #2a3a5c, #0e1830 70%); box-shadow:0 -10px 60px #4b8cff88, inset 0 8px 0 #7fd6e6aa; }
+  .big { position:absolute; left:50%; bottom:110px; width:min(520px,80vw); transform:translateX(-50%); transition:transform .5s, opacity .5s; filter:drop-shadow(0 20px 30px #000a); }
+  .big.out { opacity:0; transform:translateX(-30%); }
+
+  /* detail */
+  .detail { display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; padding:14vh 6vw; }
+  .detail .kicker { font-size:13px; }
+  .detail h2 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(48px,7vw,96px); line-height:1; margin:8px 0 22px; }
+  .detail .bar { margin:0 0 22px; }
+  .detail p { color:var(--muted); font-size:14px; line-height:1.8; max-width:440px; margin-bottom:30px; }
+  .globe { aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 30%, #4f7fc4, #183463 55%, #08122a); box-shadow:0 0 80px #4b8cff55; position:relative; overflow:hidden; }
+  .globe svg { position:absolute; inset:0; width:100%; height:100%; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:0 6vw 14vh; text-align:center; }
+  .stats b { display:block; font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:500; }
+  .stats span { color:var(--muted); font-size:12px; letter-spacing:2px; text-transform:uppercase; }
+  footer { text-align:center; padding:30px; border-top:1px solid #ffffff22; color:var(--muted); font-size:12px; }
+
+  @media (max-width:760px) {
+    nav ul li:not(:last-child) { display:none; }
+    .side svg { width:70px; } .side span { display:none; }
+    .detail, .stats { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#">haul<span>star</span></a>
+  <ul>
+    <li><a class="active" href="#fleet">Fleet</a></li>
+    <li><a href="#routes">Routes</a></li>
+    <li><a href="#stats">Tracking</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a class="pill" href="#contact">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="fleet">
+  <div class="fade" id="text">
+    <div class="kicker" id="kicker">OUR FLEET</div>
+    <h1 id="title">SEMI</h1>
+    <div class="bar"></div>
+    <p id="desc"></p>
+    <a class="pill" href="#contact">BOOK A LOAD</a>
+  </div>
+  <button class="side prev" id="prev" aria-label="Previous truck"><svg viewBox="0 0 300 120"></svg><span></span></button>
+  <button class="side next" id="next" aria-label="Next truck"><svg viewBox="0 0 300 120"></svg><span></span></button>
+  <div class="stage">
+    <div class="road"></div>
+    <svg class="big" id="big" viewBox="0 0 300 120"></svg>
+  </div>
+</section>
+
+<section class="detail" id="routes">
+  <div>
+    <div class="kicker">COAST TO COAST</div>
+    <h2>ROUTES</h2>
+    <div class="bar"></div>
+    <p>From port to warehouse to doorstep, our drivers cover 48 states and cross-border lanes into Canada and Mexico. Full truckload, LTL, refrigerated and oversized — moved on time, tracked every mile.</p>
+    <a class="pill" href="#contact">SEE COVERAGE</a>
+  </div>
+  <div class="globe">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#7fd6e6" stroke-width=".4" opacity=".7">
+      <ellipse cx="50" cy="50" rx="49" ry="18"/><ellipse cx="50" cy="50" rx="49" ry="35"/>
+      <ellipse cx="50" cy="50" rx="18" ry="49"/><ellipse cx="50" cy="50" rx="35" ry="49"/>
+      <path d="M20 40 Q45 25 70 45 T88 60" stroke-width="1" stroke-dasharray="2 2"/>
+      <circle cx="20" cy="40" r="1.8" fill="#fff"/><circle cx="70" cy="45" r="1.8" fill="#fff"/><circle cx="88" cy="60" r="1.8" fill="#fff"/>
+    </svg>
+  </div>
+</section>
+
+<section class="stats" id="stats">
+  <div><b>1,200+</b><span>Trucks on the road</span></div>
+  <div><b>98.7%</b><span>On-time delivery</span></div>
+  <div><b>24/7</b><span>Live GPS tracking</span></div>
+</section>
+
+<footer id="contact">HaulStar Freight · dispatch@haulstar.example · (555) 010-2040</footer>
+
+<script>
+  // one silhouette, tinted per truck type
+  const body = {
+    semi:    '<rect x="95" y="20" width="195" height="62" rx="4" fill="#d9e3f2"/>',
+    reefer:  '<rect x="95" y="20" width="195" height="62" rx="4" fill="#bfe9f1"/><rect x="95" y="26" width="16" height="50" fill="#5aa9bd"/>',
+    flatbed: '<rect x="95" y="70" width="195" height="12" fill="#c9d3e3"/><rect x="120" y="44" width="70" height="26" fill="#8a6b4a"/><rect x="200" y="50" width="60" height="20" fill="#8a6b4a"/>',
+    box:     '<rect x="70" y="14" width="150" height="68" rx="4" fill="#e7ecf5"/>'
+  };
+  const truck = t => body[t] +
+    `<path d="M10 82 V48 Q12 34 28 32 H${t==='box'?66:90} V82 Z" fill="#5c8dff"/>` +
+    `<rect x="18" y="38" width="30" height="16" rx="2" fill="#0b1428"/>` +
+    `<rect x="4" y="80" width="${t==='box'?220:288}" height="8" fill="#1a253d"/>` +
+    [30,130,250].filter((x,i)=>t!=='box'||i<2).map(x=>t==='box'&&x===130?190:x)
+      .map(x=>`<circle cx="${x}" cy="92" r="13" fill="#0b1428"/><circle cx="${x}" cy="92" r="5" fill="#9fb0cc"/>`).join('');
+
+  const fleet = [
+    { id:'semi', name:'SEMI', desc:'53-ft dry vans for full truckload freight. Long-haul, team drivers, and dedicated lanes across the country.' },
+    { id:'reefer', name:'REEFER', desc:'Temperature-controlled trailers from -20°F to 70°F for food, pharma and anything that must stay fresh.' },
+    { id:'flatbed', name:'FLATBED', desc:'Steel, lumber, machinery and oversized loads. Tarped, strapped, and permitted for every state.' },
+    { id:'box', name:'BOX', desc:'26-ft box trucks with liftgates for last-mile, LTL and white-glove deliveries in metro areas.' },
+  ];
+  let i = 0;
+  const $ = id => document.getElementById(id);
+  function render() {
+    const n = fleet.length, cur = fleet[i], p = fleet[(i+n-1)%n], nx = fleet[(i+1)%n];
+    $('title').textContent = cur.name; $('desc').textContent = cur.desc;
+    $('big').innerHTML = truck(cur.id);
+    $('prev').querySelector('svg').innerHTML = truck(p.id); $('prev').querySelector('span').textContent = p.name;
+    $('next').querySelector('svg').innerHTML = truck(nx.id); $('next').querySelector('span').textContent = nx.name;
+  }
+  function go(d) {
+    $('text').classList.add('out'); $('big').classList.add('out');
+    setTimeout(() => { i = (i + d + fleet.length) % fleet.length; render();
+      $('text').classList.remove('out'); $('big').classList.remove('out'); }, 400);
+  }
+  $('prev').onclick = () => go(-1); $('next').onclick = () => go(1);
+  render();
+</script>
+</body>
+</html>
