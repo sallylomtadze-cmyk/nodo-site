@@ -272,7 +272,7 @@
       <h1>Full truckload.<br>48 states.</h1>
       <p>Our own trucks and drivers. Dry van, reefer and flatbed, loaded today and on the road tomorrow.</p>
     </div>
-    <form class="quote" id="quoteForm">
+    <form method="post" class="quote" id="quoteForm">
       <h3>Get a rate</h3>
       <div class="row">
         <label>Pickup<input name="from" placeholder="Denver, CO" required></label>
@@ -438,7 +438,7 @@
       </svg>
     </div>
     <div class="panel">
-      <form class="trackform" id="trackForm">
+      <form method="post" class="trackform" id="trackForm">
         <input name="load" placeholder="Load number" aria-label="Load number" required>
         <button class="btn" type="submit">Track</button>
         <small id="trackSent" role="status" hidden>Dispatch has your load number and will send the status shortly.</small>
@@ -493,7 +493,7 @@
       <p class="need">You need a Class A CDL and a year on the road.</p>
       <p class="owner"><b>Own your truck?</b>Owner operators are welcome, and we offer lease-to-own.</p>
     </div>
-    <form class="apply" id="applyForm">
+    <form method="post" class="apply" id="applyForm">
       <label>Position<select name="position"><option>Company driver</option><option>Owner operator</option><option>Lease-to-own</option></select></label>
       <label>Full name<input name="name" required autocomplete="name"></label>
       <label>Phone<input name="phone" type="tel" required autocomplete="tel"></label>
@@ -520,7 +520,7 @@
         <div><span>Office</span><b>Denver, CO</b></div>
       </div>
     </div>
-    <form class="apply" id="contactForm">
+    <form method="post" class="apply" id="contactForm">
       <label>Name<input name="name" required autocomplete="name"></label>
       <label>Email<input name="email" type="email" required autocomplete="email"></label>
       <label class="wide">Message<textarea name="message" rows="5" required></textarea></label>
